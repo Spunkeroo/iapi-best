@@ -49,6 +49,13 @@ td{color:var(--text-dim)}tr:hover td{background:rgba(255,255,255,0.02)}tr:last-c
 .highlight{background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 var(--radius) var(--radius) 0}.highlight p{margin-bottom:0}
 pre{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;overflow-x:auto;margin:1.2rem 0;font-size:.85rem;line-height:1.5;color:var(--text)}
 code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
+.aff-section{margin:3rem 0 1rem;padding:2rem;background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius)}
+.aff-section h3{font-size:1.2rem;color:var(--accent);margin-bottom:1rem}
+.aff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem}
+.aff-link{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.88rem;font-weight:500;transition:border-color .2s,transform .2s;text-decoration:none}
+.aff-link:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+.aff-link .aff-icon{font-size:1.2rem;flex-shrink:0}
+.aff-link .aff-sub{display:block;font-size:.72rem;color:var(--text-dim);font-weight:400}
 .footer{border-top:1px solid var(--border);padding:3rem 1.5rem 2rem;position:relative;z-index:1}.network-section{max-width:780px;margin:0 auto 2rem}.network-title{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:1.5rem;text-align:center}.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}.network-group h5{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text);margin-bottom:.75rem;font-weight:600}.network-group a{display:block;font-size:.82rem;color:var(--text-dim);margin-bottom:.4rem;transition:color .2s;text-decoration:none}.network-group a:hover{color:var(--accent);text-decoration:none}.net-desc{opacity:.6;font-size:.75rem}.footer-copy{text-align:center;padding-top:2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8rem}@media(max-width:600px){.network-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.article-container{padding:2.5rem 1rem 3rem}table{font-size:.75rem}th,td{padding:.5rem .6rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0.01ms!important}}
@@ -162,6 +169,16 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 <p><strong>Pro tip:</strong> For meeting transcription products, pair Deepgram for real-time display (users see text as people talk) with AssemblyAI for the final polished transcript (better accuracy and built-in summaries). This dual-API approach costs roughly $0.008 per minute total but delivers both speed and accuracy.</p>
 </div>
 
+<div class="aff-section">
+<h3>Recommended Resources</h3>
+<div class="aff-grid">
+<a class="aff-link" href="https://www.amazon.com/dp/1492056545?tag=spunk01-20" target="_blank" rel="noopener"><span class="aff-icon">📘</span><span>Designing APIs with Swagger &amp; OpenAPI<span class="aff-sub">Build API-first workflows</span></span></a>
+<a class="aff-link" href="https://www.amazon.com/dp/161729585X?tag=spunk01-20" target="_blank" rel="noopener"><span class="aff-icon">📐</span><span>API Design Patterns<span class="aff-sub">Scalable API architecture</span></span></a>
+<a class="aff-link" href="https://www.amazon.com/dp/1800569858?tag=spunk01-20" target="_blank" rel="noopener"><span class="aff-icon">🧪</span><span>Postman API Testing<span class="aff-sub">Test &amp; automate API calls</span></span></a>
+<a class="aff-link" href="https://www.digitalocean.com/?refcode=spunk01" target="_blank" rel="noopener"><span class="aff-icon">☁️</span><span>DigitalOcean<span class="aff-sub">$200 free credit</span></span></a>
+<a class="aff-link" href="https://nordvpn.com/" target="_blank" rel="noopener"><span class="aff-icon">🔒</span><span>NordVPN<span class="aff-sub">Secure your API traffic</span></span></a>
+</div>
+</div>
 </article>
 
 <footer class="footer">
