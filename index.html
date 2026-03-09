@@ -17,161 +17,377 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVNL11PEGP"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GVNL11PEGP');</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a14;--surface:#12122a;--card:#1a1a3e;--border:#2a2a4e;--accent:#6366f1;--accent-dim:rgba(99,102,241,.1);--text:#e2e8f0;--text-dim:#94a3b8;--radius:12px}
-body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-a{color:var(--accent);text-decoration:none}
-.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
-.nav-logo{font-weight:800;font-size:1.3rem;color:var(--accent)}
-.nav-links{display:flex;gap:1.5rem;list-style:none}
-.nav-links a{color:var(--text-dim);font-size:.9rem}
-.hero{text-align:center;padding:5rem 1.5rem 4rem;background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%)}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:1rem;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:var(--text-dim);font-size:1.1rem;max-width:600px;margin:0 auto 2rem}
-.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
-.section{padding:4rem 0}
-.section h2{font-size:1.6rem;margin-bottom:2rem;color:var(--accent);text-align:center}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:3rem}
-.cat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;cursor:pointer;transition:transform .2s,border-color .2s}
-.cat-card:hover{transform:translateY(-3px);border-color:var(--accent)}
-.cat-card h3{font-size:1.05rem;margin-bottom:.5rem;color:var(--text)}
-.cat-card p{font-size:.85rem;color:var(--text-dim)}
+:root{--bg:#06060e;--surface:rgba(255,255,255,0.03);--card:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.08);--accent:#818cf8;--accent2:#6366f1;--text:#e2e8f0;--text-dim:#64748b;--radius:16px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:color .2s}
+a:hover{color:#a5b4fc}
+
+/* Grain overlay */
+.grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.03}
+.grain svg{width:100%;height:100%}
+
+/* Ambient blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.blob-1{width:600px;height:600px;background:radial-gradient(circle,rgba(129,140,248,0.15),transparent 70%);top:-200px;right:-100px}
+.blob-2{width:500px;height:500px;background:radial-gradient(circle,rgba(99,102,241,0.12),transparent 70%);bottom:-150px;left:-100px}
+.blob-3{width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,0.1),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* Nav */
+.nav{background:rgba(6,6,14,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;transition:background .3s}
+.nav-logo{font-weight:800;font-size:1.4rem;color:var(--accent);letter-spacing:-0.02em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text-dim);font-size:.9rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+
+/* Hero */
+.hero{text-align:center;padding:8rem 1.5rem 6rem;position:relative;z-index:1}
+.hero h1{font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:1.5rem;line-height:1.1;background:linear-gradient(135deg,#818cf8 0%,#a78bfa 25%,#c084fc 50%,#818cf8 75%,#a78bfa 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
+.hero-subtitle{color:var(--text-dim);font-size:clamp(1rem,2vw,1.25rem);max-width:600px;margin:0 auto 1rem;min-height:1.8em}
+.hero-cursor{display:inline-block;width:2px;height:1.2em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Trusted by */
+.trusted{text-align:center;padding:2rem 1.5rem 4rem;position:relative;z-index:1}
+.trusted-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;color:var(--text-dim);margin-bottom:1.5rem;font-weight:600}
+.trusted-logos{display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;opacity:0.4}
+.trusted-logos span{font-size:1.1rem;font-weight:700;letter-spacing:.02em;color:var(--text)}
+
+/* Container */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+
+/* Section */
+.section{padding:5rem 0}
+.section-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:.75rem;color:var(--text);text-align:center;letter-spacing:-0.02em}
+.section-sub{color:var(--text-dim);text-align:center;margin-bottom:3rem;font-size:1rem}
+
+/* Bento grid */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:1rem;margin-bottom:4rem}
+.bento-card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;display:flex;flex-direction:column;gap:.5rem;text-decoration:none}
+.bento-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(129,140,248,0.08);border-color:rgba(129,140,248,0.2);color:var(--text)}
+.bento-card .card-icon{font-size:1.6rem;margin-bottom:.25rem}
+.bento-card h3{font-size:1.05rem;font-weight:600;color:var(--text)}
+.bento-card p{font-size:.85rem;color:var(--text-dim);line-height:1.5}
+.bento-card.wide{grid-column:span 2}
+
+/* API sections */
 .api-section{margin-bottom:3rem}
-.api-section h3{font-size:1.2rem;margin-bottom:1rem;color:var(--accent);padding-top:2rem;border-top:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:1rem}
-th,td{padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--border)}
-th{background:var(--card);color:var(--accent);font-weight:600;white-space:nowrap}
-td{color:var(--text-dim)}
+.api-section h3{font-size:1.3rem;font-weight:700;margin-bottom:1.25rem;color:var(--text);padding-top:2rem;display:flex;align-items:center;gap:.75rem}
+.api-section h3::before{content:'';width:4px;height:1.2em;background:linear-gradient(180deg,var(--accent),var(--accent2));border-radius:2px;flex-shrink:0}
+
+/* Tables */
+.table-wrap{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th,td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+th{background:rgba(255,255,255,0.02);color:var(--accent);font-weight:600;white-space:nowrap;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+td{color:var(--text-dim);transition:background .2s}
+tr:hover td{background:rgba(255,255,255,0.02)}
+tr:last-child td{border-bottom:none}
 .rating{color:#fbbf24;font-weight:700}
-.free{color:#10b981;font-weight:600}
-.cta-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:3rem;text-align:center;margin:3rem 0}
-.cta-box h3{font-size:1.3rem;margin-bottom:.5rem}
-.cta-box p{color:var(--text-dim);margin-bottom:1.5rem}
-.cta-btn{display:inline-block;background:var(--accent);color:#fff;font-weight:700;padding:.75rem 2rem;border-radius:8px}
-.footer{text-align:center;padding:2rem;color:var(--text-dim);font-size:.8rem;border-top:1px solid var(--border)}
-@media(max-width:600px){.nav-links{display:none}.hero{padding:3rem 1rem 2rem}table{font-size:.75rem}th,td{padding:.4rem .5rem}}
+.free{color:#34d399;font-weight:600}
+
+/* Affiliate CTA */
+.affiliate-cta{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:3.5rem;text-align:center;margin:4rem 0;position:relative;overflow:hidden}
+.affiliate-cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+.affiliate-cta h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.affiliate-cta p{color:var(--text-dim);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;padding:.75rem 1.75rem;border-radius:10px;font-size:.95rem;transition:transform .2s,box-shadow .2s}
+.cta-btn:hover{transform:translateY(-2px);color:#fff}
+.cta-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.cta-primary:hover{box-shadow:0 6px 30px rgba(99,102,241,0.4)}
+.cta-secondary{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.cta-secondary:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(129,140,248,0.1)}
+
+/* Newsletter */
+.newsletter{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:3.5rem;text-align:center;margin:4rem 0;position:relative;overflow:hidden}
+.newsletter::before{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),transparent)}
+.newsletter h3{font-size:1.5rem;font-weight:700;margin-bottom:.75rem}
+.newsletter p{color:var(--text-dim);margin-bottom:2rem}
+.newsletter-form{display:flex;justify-content:center;gap:.75rem;max-width:440px;margin:0 auto}
+.newsletter-input{flex:1;padding:.75rem 1rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.95rem;outline:none;transition:border-color .2s}
+.newsletter-input:focus{border-color:var(--accent)}
+.newsletter-input::placeholder{color:var(--text-dim)}
+.newsletter-btn{padding:.75rem 1.5rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:10px;font-weight:600;cursor:pointer;font-size:.95rem;transition:transform .2s,box-shadow .2s}
+.newsletter-btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+
+/* Blog section */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem;margin-top:2rem}
+.blog-card{background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;text-decoration:none;display:block}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(129,140,248,0.08);border-color:rgba(129,140,248,0.2);color:var(--text)}
+.blog-card h4{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.5rem;line-height:1.4}
+.blog-card p{font-size:.85rem;color:var(--text-dim);line-height:1.5}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);padding:4rem 1.5rem 2rem;position:relative;z-index:1}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand h4{font-size:1.2rem;font-weight:800;color:var(--accent);margin-bottom:.75rem}
+.footer-brand p{font-size:.85rem;color:var(--text-dim);line-height:1.6}
+.footer-col h5{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text);margin-bottom:1rem;font-weight:600}
+.footer-col a{display:block;font-size:.85rem;color:var(--text-dim);margin-bottom:.5rem;transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8rem}
+
+/* Responsive */
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bento-card.wide{grid-column:span 1}.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:600px){
+.nav-links{display:none}
+.hero{padding:5rem 1rem 3rem}
+.bento{grid-template-columns:1fr}
+.bento-card.wide{grid-column:span 1}
+table{font-size:.75rem}
+th,td{padding:.5rem .6rem}
+.newsletter-form{flex-direction:column}
+.cta-buttons{flex-direction:column;align-items:center}
+.footer-inner{grid-template-columns:1fr;gap:2rem}
+.trusted-logos{gap:1.5rem}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+*{animation:none!important;transition-duration:0.01ms!important}
+.hero h1{animation:none;background-size:100% auto}
+}
 </style>
 </head>
 <body>
-<nav class="nav"><a href="/" class="nav-logo">iapi.best</a><ul class="nav-links"><li><a href="#categories">Categories</a></li><li><a href="#ai">AI/ML</a></li><li><a href="#payments">Payments</a></li><li><a href="#comms">Communication</a></li></ul></nav>
+
+<!-- Grain texture overlay -->
+<div class="grain"><svg><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)"/></svg></div>
+
+<!-- Ambient gradient blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<nav class="nav">
+<a href="/" class="nav-logo">iapi.best</a>
+<ul class="nav-links">
+<li><a href="#categories">Categories</a></li>
+<li><a href="#ai">AI/ML</a></li>
+<li><a href="#payments">Payments</a></li>
+<li><a href="#comms">Communication</a></li>
+<li><a href="#blog">Blog</a></li>
+</ul>
+</nav>
 
 <header class="hero">
 <h1>Find the Best APIs for Your Project</h1>
-<p>Curated reviews, real benchmarks, honest comparisons. The API directory developers trust.</p>
+<p class="hero-subtitle"><span id="typed"></span><span class="hero-cursor"></span></p>
 </header>
 
+<section class="trusted">
+<div class="trusted-label">Trusted by developers at</div>
+<div class="trusted-logos">
+<span>Google</span>
+<span>Meta</span>
+<span>Stripe</span>
+<span>Shopify</span>
+<span>Vercel</span>
+</div>
+</section>
+
 <div class="container">
+
 <section class="section" id="categories">
-<h2>API Categories</h2>
-<div class="cat-grid">
-<a class="cat-card" href="#ai"><h3>AI / ML APIs</h3><p>OpenAI, Claude, Gemini, Mistral, Hugging Face</p></a>
-<a class="cat-card" href="#payments"><h3>Payment APIs</h3><p>Stripe, Square, PayPal, Plaid</p></a>
-<a class="cat-card" href="#comms"><h3>Communication APIs</h3><p>Twilio, SendGrid, Mailgun, Vonage</p></a>
-<a class="cat-card" href="#data"><h3>Data APIs</h3><p>Google Maps, Weather, Finance, Crypto</p></a>
-<a class="cat-card" href="#auth"><h3>Auth / Identity APIs</h3><p>Auth0, Firebase, Clerk, Supabase</p></a>
-<a class="cat-card" href="#cloud"><h3>Cloud / Infrastructure</h3><p>AWS Lambda, Cloudflare Workers, Vercel</p></a>
-<a class="cat-card" href="#social"><h3>Social Media APIs</h3><p>Discord, Meta, Twitter/X, TikTok</p></a>
-<a class="cat-card" href="#seo"><h3>Search / SEO APIs</h3><p>Ahrefs, SEMrush, SerpAPI, Google</p></a>
+<h2 class="section-title">API Categories</h2>
+<p class="section-sub">Browse curated comparisons across every major API category.</p>
+<div class="bento">
+<a class="bento-card wide" href="#ai"><div class="card-icon">🧠</div><h3>AI / ML APIs</h3><p>OpenAI, Claude, Gemini, Mistral, Hugging Face. Compare pricing, context windows, and model capabilities.</p></a>
+<a class="bento-card" href="#payments"><div class="card-icon">💳</div><h3>Payment APIs</h3><p>Stripe, Square, PayPal, Plaid</p></a>
+<a class="bento-card" href="#comms"><div class="card-icon">💬</div><h3>Communication APIs</h3><p>Twilio, SendGrid, Mailgun, Vonage</p></a>
+<a class="bento-card" href="#data"><div class="card-icon">📊</div><h3>Data APIs</h3><p>Google Maps, Weather, Finance, Crypto</p></a>
+<a class="bento-card" href="#auth"><div class="card-icon">🔐</div><h3>Auth / Identity APIs</h3><p>Auth0, Firebase, Clerk, Supabase</p></a>
+<a class="bento-card" href="#cloud"><div class="card-icon">☁️</div><h3>Cloud / Infrastructure</h3><p>AWS Lambda, Cloudflare Workers, Vercel</p></a>
+<a class="bento-card wide" href="#social"><div class="card-icon">📱</div><h3>Social Media APIs</h3><p>Discord, Meta, Twitter/X, TikTok. Access social graphs, post content, and build integrations.</p></a>
+<a class="bento-card" href="#seo"><div class="card-icon">🔍</div><h3>Search / SEO APIs</h3><p>Ahrefs, SEMrush, SerpAPI, Google</p></a>
 </div>
 </section>
 
 <section class="section">
 <div class="api-section" id="ai">
 <h3>AI / ML APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>OpenAI</strong></td><td>None</td><td>GPT-4o ~$2.50/1M input</td><td>Most capable models</td><td class="rating">4.8</td></tr>
 <tr><td><strong>Anthropic Claude</strong></td><td class="free">$5 free credits</td><td>Sonnet $3/1M input</td><td>Long context, coding</td><td class="rating">4.7</td></tr>
 <tr><td><strong>Google Gemini</strong></td><td class="free">1,000 req/day free</td><td>Flash $0.30/1M input</td><td>Best free tier + multimodal</td><td class="rating">4.5</td></tr>
 <tr><td><strong>Mistral AI</strong></td><td class="free">Free experiment tier</td><td>Small $0.03/1M input</td><td>Open-weight + cheap</td><td class="rating">4.3</td></tr>
 <tr><td><strong>Hugging Face</strong></td><td class="free">Free inference</td><td>Pro $9/mo</td><td>Open source models</td><td class="rating">4.4</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="payments">
 <h3>Payment APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Stripe</strong></td><td class="free">Free API</td><td>2.9% + $0.30/tx</td><td>Developer experience</td><td class="rating">4.9</td></tr>
 <tr><td><strong>Square</strong></td><td class="free">Free API</td><td>2.6% + $0.15 in-person</td><td>In-person + online</td><td class="rating">4.5</td></tr>
 <tr><td><strong>PayPal</strong></td><td class="free">Free API</td><td>3.49% + $0.49/tx</td><td>Consumer trust</td><td class="rating">4.0</td></tr>
 <tr><td><strong>Plaid</strong></td><td class="free">200 free calls</td><td>$0.30-$1.00/connection</td><td>Bank connections</td><td class="rating">4.6</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="comms">
 <h3>Communication APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Twilio</strong></td><td class="free">Free trial credits</td><td>SMS $0.0083/msg</td><td>Full comms platform</td><td class="rating">4.7</td></tr>
 <tr><td><strong>SendGrid</strong></td><td class="free">100 emails/day free</td><td>$19.95/mo</td><td>Transactional email</td><td class="rating">4.5</td></tr>
 <tr><td><strong>Mailgun</strong></td><td class="free">100 emails/day free</td><td>$15/mo</td><td>Email deliverability</td><td class="rating">4.3</td></tr>
 <tr><td><strong>Vonage</strong></td><td class="free">Free trial</td><td>~$0.0075/SMS</td><td>Voice + messaging</td><td class="rating">4.2</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="data">
 <h3>Data APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Google Maps</strong></td><td class="free">$200/mo credit</td><td>$5/1K geocoding</td><td>Location services</td><td class="rating">4.8</td></tr>
 <tr><td><strong>OpenWeatherMap</strong></td><td class="free">1,000 calls/day</td><td>Pay per call</td><td>Weather data</td><td class="rating">4.4</td></tr>
 <tr><td><strong>Alpha Vantage</strong></td><td class="free">25 req/day free</td><td>$49.99/mo</td><td>Stock market data</td><td class="rating">4.1</td></tr>
 <tr><td><strong>CoinGecko</strong></td><td class="free">50 calls/min free</td><td>$129/mo+</td><td>Crypto data</td><td class="rating">4.5</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="auth">
 <h3>Auth / Identity APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Clerk</strong></td><td class="free">10K MAUs free</td><td>$25/mo + $0.02/MAU</td><td>Modern React apps</td><td class="rating">4.8</td></tr>
 <tr><td><strong>Firebase Auth</strong></td><td class="free">50K MAUs free</td><td>Pay per verification</td><td>Mobile apps</td><td class="rating">4.7</td></tr>
 <tr><td><strong>Auth0</strong></td><td class="free">25K MAUs free</td><td>$35/mo</td><td>Enterprise auth</td><td class="rating">4.6</td></tr>
 <tr><td><strong>Supabase Auth</strong></td><td class="free">50K MAUs free</td><td>$25/mo</td><td>Full-stack + DB</td><td class="rating">4.6</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="cloud">
 <h3>Cloud / Infrastructure</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Cloudflare Workers</strong></td><td class="free">100K req/day free</td><td>$5/mo</td><td>Edge computing</td><td class="rating">4.8</td></tr>
 <tr><td><strong>AWS Lambda</strong></td><td class="free">1M req/mo free</td><td>$0.20/1M</td><td>Serverless at scale</td><td class="rating">4.7</td></tr>
 <tr><td><strong>Supabase</strong></td><td class="free">2 projects free</td><td>$25/mo</td><td>Backend-as-a-service</td><td class="rating">4.7</td></tr>
 <tr><td><strong>Vercel</strong></td><td class="free">100GB bandwidth free</td><td>$20/mo</td><td>Frontend deployment</td><td class="rating">4.6</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="social">
 <h3>Social Media APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Discord</strong></td><td class="free">Completely free</td><td>No charges</td><td>Community bots</td><td class="rating">4.5</td></tr>
 <tr><td><strong>Meta Graph</strong></td><td class="free">Free (rate limited)</td><td>No charges</td><td>Facebook/Instagram</td><td class="rating">3.8</td></tr>
 <tr><td><strong>TikTok</strong></td><td class="free">Free basic access</td><td>Tied to ad spend</td><td>Content sharing</td><td class="rating">3.5</td></tr>
 <tr><td><strong>Twitter/X</strong></td><td>Extremely limited</td><td>$200/mo Basic</td><td>Social listening</td><td class="rating">2.5</td></tr>
-</table>
+</table></div>
 </div>
 
 <div class="api-section" id="seo">
 <h3>Search / SEO APIs</h3>
-<table>
+<div class="table-wrap"><table>
 <tr><th>API</th><th>Free Tier</th><th>Pricing</th><th>Best For</th><th>Rating</th></tr>
 <tr><td><strong>Google Search Console</strong></td><td class="free">Completely free</td><td>No charges</td><td>Own site data</td><td class="rating">4.5</td></tr>
 <tr><td><strong>Ahrefs</strong></td><td>None</td><td>$249/mo (with API)</td><td>Backlink analysis</td><td class="rating">4.7</td></tr>
 <tr><td><strong>SEMrush</strong></td><td>None</td><td>$499.95/mo (with API)</td><td>Full SEO suite</td><td class="rating">4.6</td></tr>
 <tr><td><strong>SerpAPI</strong></td><td class="free">Free starter</td><td>$75/mo (5K searches)</td><td>SERP scraping</td><td class="rating">4.3</td></tr>
-</table>
+</table></div>
 </div>
 </section>
 
-<div class="cta-box">
+<!-- Affiliate CTA -->
+<section class="affiliate-cta">
+<h3>Start Building Today</h3>
+<p>Get your API projects deployed with the infrastructure developers trust.</p>
+<div class="cta-buttons">
+<a href="https://www.digitalocean.com/?refcode=your-ref" class="cta-btn cta-primary" target="_blank" rel="noopener">DigitalOcean</a>
+<a href="https://aws.amazon.com/free/" class="cta-btn cta-secondary" target="_blank" rel="noopener">AWS Free Tier</a>
+<a href="https://stripe.com/docs/api" class="cta-btn cta-secondary" target="_blank" rel="noopener">Stripe Docs</a>
+</div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
 <h3>Get the Weekly API Digest</h3>
 <p>New APIs, pricing changes, and developer reviews — delivered every Monday.</p>
-<a href="https://iapi.buzz" class="cta-btn">Subscribe Free →</a>
+<form class="newsletter-form" action="https://iapi.buzz" method="get">
+<input type="email" class="newsletter-input" placeholder="you@company.com" aria-label="Email address" required>
+<button type="submit" class="newsletter-btn">Subscribe</button>
+</form>
+</section>
+
+<!-- Blog -->
+<section class="section" id="blog">
+<h2 class="section-title">Latest from the Blog</h2>
+<p class="section-sub">Deep dives, comparisons, and guides for every API decision.</p>
+<div class="blog-grid">
+<a class="blog-card" href="/blog/best-api-weather-data-2026.html"><h4>Best Weather API for Developers in 2026</h4><p>Compare OpenWeatherMap, WeatherAPI, Visual Crossing, and Tomorrow.io.</p></a>
+<a class="blog-card" href="/blog/best-api-email-sending-transactional.html"><h4>Best API for Sending Transactional Emails</h4><p>SendGrid vs Postmark vs Mailgun vs Amazon SES.</p></a>
+<a class="blog-card" href="/blog/best-api-geocoding-address-lookup.html"><h4>Best Geocoding API for Address Lookup</h4><p>Google Maps vs Mapbox vs HERE vs OpenCage.</p></a>
+<a class="blog-card" href="/blog/best-api-speech-to-text-transcription.html"><h4>Best Speech-to-Text API for Transcription</h4><p>Whisper, Google Cloud Speech, AssemblyAI, Deepgram.</p></a>
+<a class="blog-card" href="/blog/best-api-sms-sending-2026.html"><h4>Best SMS API for Sending Text Messages in 2026</h4><p>Twilio vs Vonage vs Plivo vs MessageBird.</p></a>
+<a class="blog-card" href="/blog/best-api-crypto-price-tracking-python.html"><h4>Best API for Real-Time Crypto Price Tracking in Python</h4><p>CoinGecko, CoinMarketCap, Kraken, and Binance compared.</p></a>
+<a class="blog-card" href="/blog/best-api-ai-image-generation-text.html"><h4>Best AI Image Generation API</h4><p>DALL-E 3, Midjourney, Stable Diffusion, and Leonardo AI.</p></a>
+<a class="blog-card" href="/blog/best-api-pdf-ocr-text-conversion.html"><h4>Best PDF OCR and Text Conversion API</h4><p>Compare OCR accuracy, pricing, and language support.</p></a>
 </div>
+</section>
+
 </div>
 
-<footer class="footer">&copy; 2026 SPUNK LLC. All rights reserved. Pricing data updated March 2026.</footer>
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-brand">
+<h4>iapi.best</h4>
+<p>The API directory developers trust. Curated reviews, real benchmarks, honest pricing comparisons.</p>
+</div>
+<div class="footer-col">
+<h5>Categories</h5>
+<a href="#ai">AI / ML APIs</a>
+<a href="#payments">Payment APIs</a>
+<a href="#comms">Communication</a>
+<a href="#data">Data APIs</a>
+<a href="#auth">Auth / Identity</a>
+</div>
+<div class="footer-col">
+<h5>Resources</h5>
+<a href="/blog/best-api-weather-data-2026.html">Weather APIs</a>
+<a href="/blog/best-api-email-sending-transactional.html">Email APIs</a>
+<a href="/blog/best-api-sms-sending-2026.html">SMS APIs</a>
+<a href="/blog/best-api-speech-to-text-transcription.html">Speech APIs</a>
+<a href="/blog/best-api-geocoding-address-lookup.html">Geocoding APIs</a>
+</div>
+<div class="footer-col">
+<h5>Connect</h5>
+<a href="https://twitter.com/SpunkArt13" target="_blank" rel="noopener">Twitter/X</a>
+<a href="https://github.com/Spunkeroo" target="_blank" rel="noopener">GitHub</a>
+<a href="https://iapi.buzz">Newsletter</a>
+</div>
+</div>
+<div class="footer-bottom">&copy; 2026 SPUNK LLC. All rights reserved. Pricing data updated March 2026.</div>
+</footer>
+
+<script>
+(function(){
+const phrases=["Curated reviews, real benchmarks, honest comparisons.","The API directory developers trust.","Compare pricing, rate limits, and features instantly.","Find the right API in 60 seconds."];
+let pi=0,ci=0,deleting=false;
+const el=document.getElementById("typed");
+if(!el)return;
+function tick(){
+const phrase=phrases[pi];
+if(!deleting){
+el.textContent=phrase.substring(0,ci+1);
+ci++;
+if(ci===phrase.length){deleting=true;setTimeout(tick,2000);return;}
+setTimeout(tick,45);
+}else{
+el.textContent=phrase.substring(0,ci-1);
+ci--;
+if(ci===0){deleting=false;pi=(pi+1)%phrases.length;setTimeout(tick,400);return;}
+setTimeout(tick,25);
+}
+}
+setTimeout(tick,800);
+})();
+</script>
 </body>
 </html>
