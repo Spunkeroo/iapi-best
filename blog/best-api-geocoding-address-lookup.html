@@ -85,7 +85,7 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <h2>Google Maps Geocoding: The Accuracy Benchmark</h2>
 
-<p>Google Maps Geocoding API remains the gold standard for geocoding accuracy worldwide. Google invests billions annually in mapping data, and it shows. In our testing across 1,000 addresses spanning 30 countries, Google correctly geocoded 97.8% to the exact building or parcel level. No other provider comes close to this accuracy, particularly in developing countries and rural areas where competing data sources have gaps.</p>
+<p>Google Maps Geocoding API remains the gold standard for geocoding accuracy worldwide. Google invests billions annually in mapping data, and it shows. Google is widely regarded as the most accurate geocoding provider, particularly in developing countries and rural areas where competing data sources have gaps.</p>
 
 <p>The API is straightforward: pass an address string, receive coordinates plus parsed address components (street number, route, city, state, country, postal code). The reverse geocoding is equally accurate, returning formatted addresses from coordinates that match how locals actually describe the location. The Places Autocomplete API, while technically a separate product, integrates seamlessly and provides the address suggestion experience that users expect in 2026.</p>
 
@@ -125,20 +125,15 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <h2>Accuracy by Region</h2>
 
-<p>We geocoded 200 addresses in each of five regions and measured what percentage returned coordinates within 50 meters of the correct location:</p>
+<p>Geocoding accuracy varies significantly by region and provider. Here is what to expect based on developer experience and publicly available comparisons:</p>
 
-<div class="table-wrap"><table>
-<thead><tr><th>Region</th><th>Google Maps</th><th>Mapbox</th><th>HERE</th><th>OpenCage</th></tr></thead>
-<tbody>
-<tr><td><strong>United States</strong></td><td>99%</td><td>96%</td><td>97%</td><td>93%</td></tr>
-<tr><td><strong>Western Europe</strong></td><td>98%</td><td>95%</td><td>96%</td><td>94%</td></tr>
-<tr><td><strong>Southeast Asia</strong></td><td>95%</td><td>82%</td><td>88%</td><td>78%</td></tr>
-<tr><td><strong>Sub-Saharan Africa</strong></td><td>89%</td><td>71%</td><td>79%</td><td>65%</td></tr>
-<tr><td><strong>South America</strong></td><td>93%</td><td>85%</td><td>87%</td><td>80%</td></tr>
-</tbody>
-</table></div>
+<ul>
+<li><strong>United States and Western Europe:</strong> All four providers deliver strong results. Google and HERE are known for the highest precision, with Mapbox close behind. OpenCage, built on OpenStreetMap data, is reliable in areas with strong OSM contributor coverage.</li>
+<li><strong>Southeast Asia and South America:</strong> Google maintains a clear lead in these regions due to its proprietary mapping data. HERE offers good coverage in major cities. Mapbox and OpenCage accuracy depends heavily on local OpenStreetMap data quality.</li>
+<li><strong>Sub-Saharan Africa:</strong> Google is the strongest option by a notable margin. HERE and Mapbox have growing but uneven coverage. OpenCage coverage varies significantly by country.</li>
+</ul>
 
-<p>Google maintains a significant accuracy lead in developing regions. For applications serving primarily US and European users, the accuracy gap between providers narrows considerably.</p>
+<p>For applications serving primarily US and European users, the accuracy gap between providers narrows considerably. The differences become most pronounced in developing regions.</p>
 
 <h2>Verdict: Which Geocoding API Should You Use?</h2>
 

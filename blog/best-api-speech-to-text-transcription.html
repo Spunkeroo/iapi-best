@@ -132,20 +132,16 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <h2>Accuracy Comparison</h2>
 
-<p>We tested each API on five audio categories, each containing 10 hours of audio. Word Error Rate (WER), where lower is better:</p>
+<p>Accuracy varies by audio type and conditions. Based on publicly reported benchmarks and developer experience, here is how each provider generally performs:</p>
 
-<div class="table-wrap"><table>
-<thead><tr><th>Audio Type</th><th>Whisper</th><th>Google Enhanced</th><th>AssemblyAI</th><th>Deepgram Nova-2</th></tr></thead>
-<tbody>
-<tr><td><strong>Clear podcast</strong></td><td>3.2%</td><td>3.5%</td><td>2.8%</td><td>3.1%</td></tr>
-<tr><td><strong>Conference talk</strong></td><td>4.1%</td><td>4.5%</td><td>3.6%</td><td>4.0%</td></tr>
-<tr><td><strong>Phone call (8kHz)</strong></td><td>6.8%</td><td>5.2%</td><td>5.9%</td><td>5.5%</td></tr>
-<tr><td><strong>Heavy accent</strong></td><td>5.5%</td><td>7.2%</td><td>6.8%</td><td>7.5%</td></tr>
-<tr><td><strong>Noisy environment</strong></td><td>8.1%</td><td>9.4%</td><td>8.8%</td><td>9.0%</td></tr>
-</tbody>
-</table></div>
+<ul>
+<li><strong>Clean English audio (podcasts, talks):</strong> AssemblyAI is widely regarded as having the best accuracy for clean English content. Deepgram Nova-2 and Whisper also perform very well. All modern providers achieve word error rates well below 5% on clear audio.</li>
+<li><strong>Phone calls (8kHz telephony):</strong> Google Cloud Speech has a specialized telephony model that is purpose-built for phone audio and tends to outperform general-purpose models on this format.</li>
+<li><strong>Accented and noisy audio:</strong> Whisper, trained on 680,000 hours of diverse audio, generally handles accented speech and noisy environments better than competitors. Its broad training data gives it resilience in challenging acoustic conditions.</li>
+<li><strong>Overall speed:</strong> Deepgram processes audio faster than any competitor, typically completing batch jobs in about 10% of the audio duration.</li>
+</ul>
 
-<p>Whisper leads on accented and noisy audio. AssemblyAI leads on clean, standard English. Google's phone model excels at telephony audio. Deepgram performs well across the board while processing fastest.</p>
+<p>For most English-first applications, AssemblyAI and Deepgram offer the best accuracy-to-cost ratio. For multilingual or challenging audio, Whisper is the strongest choice.</p>
 
 <h2>Real-Time vs Batch: When Each Matters</h2>
 

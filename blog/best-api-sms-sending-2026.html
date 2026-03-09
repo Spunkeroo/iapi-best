@@ -91,7 +91,7 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>Beyond SMS, Twilio's platform covers voice calls, video, email (SendGrid), WhatsApp, and programmable chat. This breadth means you can handle all communication channels from a single vendor, with unified reporting and a single billing relationship. The Programmable Messaging service abstracts away the complexity of sender selection, automatically choosing between long codes, toll-free, short codes, and 10DLC based on the destination and your configuration.</p>
 
-<p>Twilio's delivery rates are consistently strong. In our testing across 10,000 messages to US numbers, 99.2% were delivered successfully with a median delivery time of 1.8 seconds. International delivery rates averaged 96.5% across 20 countries, with the best rates in North America and Western Europe.</p>
+<p>Twilio is known for consistently strong delivery rates. Developer reports and industry analysis generally place Twilio's US delivery rates above 99%, with competitive international delivery across North America and Western Europe.</p>
 
 <p><strong>Where it shines:</strong> Best documentation and developer experience. Largest ecosystem of plugins, integrations, and community resources. Most mature compliance tools for 10DLC registration, TCPA, and GDPR. Broadest platform covering SMS, voice, video, email, and chat.</p>
 
@@ -113,7 +113,7 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>Plivo is the cost leader for SMS APIs. At $0.0050 per outbound US message, it is 40% cheaper than Twilio and 30% cheaper than Vonage. For applications sending hundreds of thousands or millions of messages per month, this difference adds up fast. A million US messages per month costs $5,000 on Plivo versus $8,300 on Twilio.</p>
 
-<p>Despite the lower price, Plivo does not cut corners on reliability. Their infrastructure processes over 50 billion API calls per year, and the SMS delivery rates in our testing (98.8% US, 95.2% international) were within 1% of Twilio's. The API design is clean and REST-based, with straightforward endpoints for sending messages, managing phone numbers, and handling webhooks.</p>
+<p>Despite the lower price, Plivo does not cut corners on reliability. Their infrastructure processes billions of API calls per year, and developer reports indicate that Plivo's delivery rates are competitive with Twilio's in major markets. The API design is clean and REST-based, with straightforward endpoints for sending messages, managing phone numbers, and handling webhooks.</p>
 
 <p>Plivo also offers PHLO, a visual workflow builder that lets you create SMS flows (like appointment reminders with confirmation replies) without writing code. This is useful for teams that want non-engineers to manage messaging campaigns.</p>
 
@@ -153,21 +153,18 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>Twilio provides the smoothest 10DLC onboarding with in-dashboard registration and automatic campaign approval for common use cases. Vonage and MessageBird require manual campaign descriptions. Plivo's process works but has less guidance documentation.</p>
 
-<h2>Delivery Rate Testing</h2>
+<h2>Delivery Rates by Region</h2>
 
-<p>We sent 10,000 SMS messages through each provider (2,500 per region) and measured delivery success rates:</p>
+<p>Delivery rates vary by provider and region. Based on provider reputation and developer community feedback:</p>
 
-<div class="table-wrap"><table>
-<thead><tr><th>Region</th><th>Twilio</th><th>Vonage</th><th>Plivo</th><th>MessageBird</th></tr></thead>
-<tbody>
-<tr><td><strong>United States</strong></td><td>99.2%</td><td>98.9%</td><td>98.8%</td><td>98.5%</td></tr>
-<tr><td><strong>Western Europe</strong></td><td>98.7%</td><td>99.1%</td><td>97.9%</td><td>99.3%</td></tr>
-<tr><td><strong>India</strong></td><td>94.8%</td><td>96.5%</td><td>95.2%</td><td>93.8%</td></tr>
-<tr><td><strong>Brazil</strong></td><td>95.1%</td><td>96.2%</td><td>94.5%</td><td>94.0%</td></tr>
-</tbody>
-</table></div>
+<ul>
+<li><strong>United States:</strong> All four providers deliver strong US rates, generally above 98% for properly registered 10DLC or toll-free numbers. Twilio and Vonage are widely considered the most reliable for US delivery.</li>
+<li><strong>Western Europe:</strong> MessageBird has a strong reputation in European markets due to direct carrier connections across the EU. Vonage also performs well in this region.</li>
+<li><strong>India and Southeast Asia:</strong> Vonage is generally regarded as the strongest provider for these markets, benefiting from direct carrier relationships. Twilio and Plivo also offer solid coverage.</li>
+<li><strong>Latin America:</strong> Vonage's direct carrier connections tend to provide an edge. Delivery rates across all providers are lower in this region compared to the US and Europe.</li>
+</ul>
 
-<p>Vonage's direct carrier relationships give it an edge in international markets. MessageBird leads in Western Europe. US delivery rates are strong across all four providers.</p>
+<p>For any region, delivery rates depend heavily on proper sender registration, message content, and carrier filtering rules.</p>
 
 <h2>Verdict: Which SMS API Should You Use?</h2>
 

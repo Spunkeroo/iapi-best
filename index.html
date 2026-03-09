@@ -177,14 +177,7 @@ th,td{padding:.5rem .6rem}
 </header>
 
 <section class="trusted">
-<div class="trusted-label">Trusted by developers at</div>
-<div class="trusted-logos">
-<span>Google</span>
-<span>Meta</span>
-<span>Stripe</span>
-<span>Shopify</span>
-<span>Vercel</span>
-</div>
+<div class="trusted-label">Discover the best APIs for your next project</div>
 </section>
 
 <div class="container">
@@ -300,7 +293,7 @@ th,td{padding:.5rem .6rem}
 <h3>Start Building Today</h3>
 <p>Get your API projects deployed with the infrastructure developers trust.</p>
 <div class="cta-buttons">
-<a href="https://www.digitalocean.com/?refcode=your-ref" class="cta-btn cta-primary" target="_blank" rel="noopener">DigitalOcean</a>
+<a href="https://www.digitalocean.com/" class="cta-btn cta-primary" target="_blank" rel="noopener">DigitalOcean</a>
 <a href="https://aws.amazon.com/free/" class="cta-btn cta-secondary" target="_blank" rel="noopener">AWS Free Tier</a>
 <a href="https://stripe.com/docs/api" class="cta-btn cta-secondary" target="_blank" rel="noopener">Stripe Docs</a>
 </div>
@@ -310,7 +303,7 @@ th,td{padding:.5rem .6rem}
 <section class="newsletter">
 <h3>Get the Weekly API Digest</h3>
 <p>New APIs, pricing changes, and developer reviews — delivered every Monday.</p>
-<form class="newsletter-form" action="https://iapi.buzz" method="get">
+<form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed!'">
 <input type="email" class="newsletter-input" placeholder="you@company.com" aria-label="Email address" required>
 <button type="submit" class="newsletter-btn">Subscribe</button>
 </form>

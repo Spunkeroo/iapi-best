@@ -146,12 +146,12 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <h2>Accuracy Comparison</h2>
 
-<p>Accuracy varies by geography and forecast horizon. In our testing across 50 US cities over 30 days:</p>
+<p>Accuracy varies by geography and forecast horizon. Based on general industry reputation and developer feedback:</p>
 
 <ul>
-<li><strong>Temperature accuracy (24h forecast):</strong> Tomorrow.io led with 1.2F average error, followed by OpenWeatherMap (1.5F), Visual Crossing (1.6F), and WeatherAPI (1.8F).</li>
-<li><strong>Precipitation prediction (will it rain today):</strong> Tomorrow.io achieved 89% accuracy, OpenWeatherMap 85%, WeatherAPI 83%, Visual Crossing 82%.</li>
-<li><strong>3-day forecast accuracy:</strong> All four APIs converged to within 2-3F average temperature error, with Tomorrow.io maintaining a slight edge.</li>
+<li><strong>Short-term forecasts (24h):</strong> Tomorrow.io is known for the best short-term accuracy, thanks to its proprietary sensor network and 5-minute data refresh. OpenWeatherMap also performs well for day-ahead forecasts.</li>
+<li><strong>Precipitation prediction:</strong> Tomorrow.io's minute-level nowcasting gives it an edge for precipitation forecasts. The other providers offer solid but less granular precipitation data.</li>
+<li><strong>Multi-day forecasts (3+ days):</strong> Accuracy differences between providers become much smaller at longer horizons. The laws of atmospheric physics limit long-range forecasting regardless of the data source.</li>
 </ul>
 
 <p>For forecasts beyond 5 days, accuracy differences between providers become negligible. The laws of atmospheric physics limit long-range forecasting regardless of the data source.</p>

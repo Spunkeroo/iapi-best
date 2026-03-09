@@ -89,7 +89,7 @@ td{color:var(--text-dim)}
 <p><strong>What sets Twilio apart:</strong> The Line Type Intelligence package distinguishes between mobile, landline, fixed VoIP, non-fixed VoIP, toll-free, and pager. This granularity matters for fraud detection. Non-fixed VoIP numbers (like Google Voice or TextNow) are significantly higher risk for account verification than mobile numbers, and Twilio is one of the few APIs that makes this distinction.</p>
 
 <div class="highlight">
-<p><strong>Fraud use case:</strong> During user sign-up, query Twilio Lookup for line type. If the number is non-fixed VoIP, flag for additional verification. This single check can reduce fake account creation by 30-50% in many applications.</p>
+<p><strong>Fraud use case:</strong> During user sign-up, query Twilio Lookup for line type. If the number is non-fixed VoIP, flag for additional verification. This single check can meaningfully reduce fake account creation in many applications.</p>
 </div>
 
 <p><strong>Best for:</strong> Any production application where accuracy and reliability matter, especially if you are already in the Twilio ecosystem.</p>
@@ -155,21 +155,13 @@ td{color:var(--text-dim)}
 
 <p><strong>Best for:</strong> Enterprise call centers, telecom companies, and applications where identifying the person behind a phone number is the primary requirement.</p>
 
-<h2>Accuracy by Region: What Our Tests Showed</h2>
+<h2>Accuracy by Region: General Observations</h2>
 
-<table>
-<thead><tr><th>Region</th><th>Twilio</th><th>NumVerify</th><th>AbstractAPI</th><th>TrueCaller</th></tr></thead>
-<tbody>
-<tr><td>United States</td><td>96% carrier accuracy</td><td>89%</td><td>90%</td><td>94%</td></tr>
-<tr><td>United Kingdom</td><td>94%</td><td>91%</td><td>88%</td><td>92%</td></tr>
-<tr><td>Germany</td><td>92%</td><td>88%</td><td>86%</td><td>90%</td></tr>
-<tr><td>India</td><td>88%</td><td>82%</td><td>80%</td><td>95%</td></tr>
-<tr><td>Brazil</td><td>85%</td><td>79%</td><td>78%</td><td>88%</td></tr>
-<tr><td>Nigeria</td><td>80%</td><td>72%</td><td>70%</td><td>85%</td></tr>
-</tbody>
-</table>
+<p><strong>United States and Europe:</strong> Twilio generally offers the strongest carrier identification in these regions, benefiting from well-maintained telecom databases. NumVerify and AbstractAPI also perform reliably for US and European numbers.</p>
 
-<p>TrueCaller's accuracy advantage in India and developing markets is notable and directly tied to their large user base in those regions. Twilio leads in the US and Europe where telecom database coverage is strongest.</p>
+<p><strong>India and developing markets:</strong> TrueCaller has a notable advantage in India, Southeast Asia, and Africa due to its large user base in those regions. Twilio and NumVerify rely on telecom databases that may be less complete in developing markets.</p>
+
+<p><strong>Ported numbers:</strong> All providers struggle with recently ported numbers across every region. Twilio handles US porting data better than most, but no provider is fully reliable for numbers that have switched carriers.</p>
 
 <h2>GDPR and Privacy Compliance</h2>
 

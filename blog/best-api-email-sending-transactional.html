@@ -76,8 +76,8 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 <tbody>
 <tr><td><strong>Free Tier</strong></td><td class="free">100 emails/day</td><td>100 emails/mo</td><td class="free">100 emails/day (sandbox)</td><td class="free">3,000 emails/mo (via EC2)</td></tr>
 <tr><td><strong>Cost per 100K emails</strong></td><td>$19.95</td><td>$115</td><td>$15</td><td>$10</td></tr>
-<tr><td><strong>Avg Delivery Time</strong></td><td>3-8 sec</td><td>1-3 sec</td><td>5-12 sec</td><td>2-5 sec</td></tr>
-<tr><td><strong>Inbox Rate</strong></td><td>95-97%</td><td>98-99%</td><td>93-96%</td><td>96-98%</td></tr>
+<tr><td><strong>Delivery Speed</strong></td><td>Fast</td><td>Fastest</td><td>Moderate</td><td>Fast</td></tr>
+<tr><td><strong>Inbox Reputation</strong></td><td>Strong</td><td>Excellent</td><td>Good</td><td>Strong</td></tr>
 <tr><td><strong>SMTP Support</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
 <tr><td><strong>Template Engine</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
 <tr><td><strong>Webhooks</strong></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Via SNS</td></tr>
@@ -91,15 +91,15 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>The API is well-designed for developers. You can send emails with a simple POST request containing JSON, or use SMTP if you prefer. The dynamic template system uses Handlebars syntax, allowing you to create email templates in the web UI and populate them with data from your API calls. Event webhooks push delivery, open, click, bounce, and spam report events to your server in near real-time.</p>
 
-<p><strong>Deliverability:</strong> SendGrid maintains dedicated IP pools for transactional email that are separate from marketing sends. In our testing, 95-97% of emails reached the primary inbox across Gmail, Outlook, and Yahoo. Delivery times averaged 3-8 seconds from API call to inbox arrival.</p>
+<p><strong>Deliverability:</strong> SendGrid maintains dedicated IP pools for transactional email that are separate from marketing sends. SendGrid is known for strong inbox placement across Gmail, Outlook, and Yahoo, with delivery times that are generally fast for a shared-infrastructure provider.</p>
 
 <p><strong>Where it falls short:</strong> SendGrid mixes transactional and marketing email infrastructure, which can affect deliverability if your marketing reputation drops. The web dashboard has become bloated with features, making it harder to find what you need. Customer support on lower-tier plans is email-only with slow response times.</p>
 
 <h2>Postmark: Best Deliverability, Period</h2>
 
-<p>Postmark takes a fundamentally different approach: they only handle transactional email. No marketing, no newsletters, no bulk sends. This focus means their IP reputation stays exceptionally clean, because every email on their infrastructure is something a user explicitly requested. The result is the highest inbox rates in the industry, consistently hitting 98-99% across major providers.</p>
+<p>Postmark takes a fundamentally different approach: they only handle transactional email. No marketing, no newsletters, no bulk sends. This focus means their IP reputation stays exceptionally clean, because every email on their infrastructure is something a user explicitly requested. The result is widely regarded as the highest inbox placement rate in the industry.</p>
 
-<p>Delivery speed is where Postmark truly stands out. They publicly report their delivery metrics, and the median delivery time is under 1 second, with 99% of emails delivered within 3 seconds. For password resets and two-factor authentication codes, this speed difference is meaningful.</p>
+<p>Delivery speed is where Postmark truly stands out. They publicly report their delivery metrics, and Postmark publicly reports median delivery times well under a few seconds. For password resets and two-factor authentication codes, this speed difference is meaningful.</p>
 
 <p>The developer experience is polished. The API is clean and predictable, the documentation includes real examples for every endpoint, and their message streams feature lets you separate different types of transactional email (receipts vs. notifications vs. security alerts) with separate tracking and deliverability metrics.</p>
 
@@ -111,9 +111,9 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>The pricing is competitive at $15 per month for 50,000 emails, and they offer a pay-as-you-go option at $1.00 per 1,000 emails with no monthly commitment. The email validation API, which checks if an address is deliverable before you send, is a standout feature that reduces bounce rates and protects your sender reputation.</p>
 
-<p><strong>Deliverability:</strong> Mailgun's inbox rates of 93-96% are the lowest among these four providers. This is partly because Mailgun allows marketing sends on shared infrastructure, which can impact transactional deliverability. Using a dedicated IP (from $59/month) closes this gap significantly.</p>
+<p><strong>Deliverability:</strong> Mailgun's inbox placement is generally considered the weakest among these four providers. This is partly because Mailgun allows marketing sends on shared infrastructure, which can impact transactional deliverability. Using a dedicated IP (from $59/month) closes this gap significantly.</p>
 
-<p><strong>Where it falls short:</strong> The free tier is sandbox-only, meaning you can only send to verified email addresses. This makes testing with real users impossible without upgrading. Delivery times of 5-12 seconds are the slowest in this comparison. The dashboard UI feels dated compared to SendGrid and Postmark.</p>
+<p><strong>Where it falls short:</strong> The free tier is sandbox-only, meaning you can only send to verified email addresses. This makes testing with real users impossible without upgrading. Delivery speed is generally slower than competitors like Postmark and SES. The dashboard UI feels dated compared to SendGrid and Postmark.</p>
 
 <h2>Amazon SES: Best for High Volume and Cost</h2>
 
@@ -121,7 +121,7 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <p>SES has matured significantly from its early days as a bare-bones SMTP relay. The v2 API supports templates, configuration sets for tracking, contact lists, and the Virtual Deliverability Manager that uses machine learning to optimize send times and flag deliverability issues before they impact your reputation.</p>
 
-<p><strong>Deliverability:</strong> SES inbox rates of 96-98% are strong, especially considering the price point. Amazon manages shared IP pools aggressively and will throttle or suspend accounts that generate complaints, which keeps the overall IP reputation high. Dedicated IPs are available at $24.95/month, the cheapest option among these four.</p>
+<p><strong>Deliverability:</strong> SES is known for strong inbox placement, especially considering the price point. Amazon manages shared IP pools aggressively and will throttle or suspend accounts that generate complaints, which keeps the overall IP reputation high. Dedicated IPs are available at $24.95/month, the cheapest option among these four.</p>
 
 <p><strong>Where it falls short:</strong> The initial setup is the most complex. You start in sandbox mode, which limits sending to verified addresses only, and must request production access through a manual review process that can take 24-48 hours. Event tracking requires configuring SNS topics and Lambda functions, whereas other providers offer simple webhook URLs. If you are not already on AWS, the learning curve is steep.</p>
 
@@ -152,7 +152,7 @@ code{font-family:'SF Mono',Consolas,monospace;font-size:.9em}
 
 <ul>
 <li><strong>Startup or small team:</strong> SendGrid. Best balance of features, deliverability, and price. The free tier covers development, and $19.95/month handles up to 100K emails.</li>
-<li><strong>Critical transactional email (auth codes, receipts):</strong> Postmark. The 98-99% inbox rate and sub-second delivery justify the premium for emails that absolutely must arrive.</li>
+<li><strong>Critical transactional email (auth codes, receipts):</strong> Postmark. The industry-leading inbox placement and fast delivery justify the premium for emails that absolutely must arrive.</li>
 <li><strong>Complex email workflows:</strong> Mailgun. Inbound processing, routing rules, and granular control for teams building email-centric products.</li>
 <li><strong>High volume on AWS:</strong> Amazon SES. At $0.10/1K emails, nothing else comes close on cost if you are already in the AWS ecosystem.</li>
 </ul>

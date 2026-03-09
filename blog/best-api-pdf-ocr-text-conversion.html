@@ -208,20 +208,16 @@ def pdf_to_text(pdf_path, output_dir):
 
 <h2>Accuracy on Real-World Documents</h2>
 
-<p>We tested all four solutions on five common document types. Accuracy is measured as character-level accuracy compared to manually verified ground truth:</p>
+<p>Accuracy varies significantly by document type and condition. Here is how each API tends to perform based on publicly available benchmarks and developer reports:</p>
 
-<table>
-<thead><tr><th>Document Type</th><th>Textract</th><th>Google Vision</th><th>Azure</th><th>Tesseract</th></tr></thead>
-<tbody>
-<tr><td>Clean printed invoice</td><td>99.1%</td><td>99.0%</td><td>99.2%</td><td>96.5%</td></tr>
-<tr><td>Scanned contract (300 DPI)</td><td>97.8%</td><td>97.5%</td><td>98.1%</td><td>93.2%</td></tr>
-<tr><td>Faxed document (low quality)</td><td>91.3%</td><td>89.7%</td><td>93.5%</td><td>78.4%</td></tr>
-<tr><td>Handwritten notes</td><td>85.2%</td><td>83.9%</td><td>88.7%</td><td>52.1%</td></tr>
-<tr><td>Mixed language (EN + ZH)</td><td>94.1%</td><td>96.8%</td><td>95.0%</td><td>81.3%</td></tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Clean printed documents:</strong> All three cloud providers deliver excellent results, typically above 97% character accuracy. Tesseract performs well on clean, high-resolution prints but lags behind the cloud APIs.</li>
+<li><strong>Degraded scans and faxes:</strong> Azure AI Document Intelligence is widely regarded as the strongest performer on poor-quality scans, thanks to its automatic deskewing and preprocessing. Textract also handles degraded documents well. Tesseract struggles significantly with low-quality inputs.</li>
+<li><strong>Handwritten text:</strong> Azure leads in handwriting recognition, particularly for cursive English. Google and Textract offer reasonable handwriting support. Tesseract has very limited handwriting capability.</li>
+<li><strong>Multilingual documents:</strong> Google Cloud Vision excels with mixed-language content, especially documents combining Latin scripts with CJK characters. Its automatic language detection handles code-switching better than competitors.</li>
+</ul>
 
-<p>Azure wins on degraded scans and handwriting. Google wins on multilingual documents. All three cloud providers are close on clean documents. Tesseract is competitive only on high-quality, single-language printed text.</p>
+<p>For clean, single-language documents, the accuracy gap between cloud providers is small. The differences become pronounced with degraded scans, handwriting, and multilingual content.</p>
 
 <h2>Verdict: Matching APIs to Use Cases</h2>
 
