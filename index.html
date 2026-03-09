@@ -129,7 +129,16 @@ tr:last-child td{border-bottom:none}
 .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid var(--border);color:var(--text-dim);font-size:.8rem}
 
 /* Responsive */
-@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bento-card.wide{grid-column:span 1}.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}}
+/* Network section */
+.network-section{max-width:1200px;margin:0 auto 3rem;padding:0 1.5rem}
+.network-title{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:1.5rem;text-align:center}
+.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.network-group h5{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text);margin-bottom:.75rem;font-weight:600}
+.network-group a{display:block;font-size:.82rem;color:var(--text-dim);margin-bottom:.4rem;transition:color .2s}
+.network-group a:hover{color:var(--accent)}
+.network-group .net-desc{color:var(--text-dim);opacity:.6;font-size:.75rem}
+
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.bento-card.wide{grid-column:span 1}.footer-inner{grid-template-columns:1fr 1fr;gap:2rem}.network-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){
 .nav-links{display:none}
 .hero{padding:5rem 1rem 3rem}
@@ -141,6 +150,7 @@ th,td{padding:.5rem .6rem}
 .cta-buttons{flex-direction:column;align-items:center}
 .footer-inner{grid-template-columns:1fr;gap:2rem}
 .trusted-logos{gap:1.5rem}
+.network-grid{grid-template-columns:1fr}
 }
 
 /* Reduced motion */
@@ -356,7 +366,34 @@ th,td{padding:.5rem .6rem}
 <a href="https://iapi.buzz">Newsletter</a>
 </div>
 </div>
-<div class="footer-bottom">&copy; 2026 SPUNK LLC. All rights reserved. Pricing data updated March 2026.</div>
+<div class="network-section">
+<div class="network-title">SPUNK LLC Network</div>
+<div class="network-grid">
+<div class="network-group">
+<h5>API Sites</h5>
+<a href="https://iapi.best">iapi.best <span class="net-desc">— API Directory</span></a>
+<a href="https://iapi.buzz">iapi.buzz <span class="net-desc">— API News</span></a>
+<a href="https://iapi.click">iapi.click <span class="net-desc">— No-Code API Integration</span></a>
+</div>
+<div class="network-group">
+<h5>Key Management</h5>
+<a href="https://keys.courses">keys.courses <span class="net-desc">— API Security Education</span></a>
+<a href="https://keys.makeup">keys.makeup <span class="net-desc">— API Key Generator</span></a>
+<a href="https://keys.yachts">keys.yachts <span class="net-desc">— Enterprise Key Management</span></a>
+<a href="https://keys.surf">keys.surf <span class="net-desc">— Browser Key Manager</span></a>
+<a href="https://keys.skin">keys.skin <span class="net-desc">— Developer Themes</span></a>
+<a href="https://keys.gay">keys.gay <span class="net-desc">— LGBTQ+ Privacy Security</span></a>
+<a href="https://keys.motorcycles">keys.motorcycles <span class="net-desc">— Motorcycle Key Guide</span></a>
+</div>
+<div class="network-group">
+<h5>More from SPUNK LLC</h5>
+<a href="https://spunkart.com">SpunkArt.com</a>
+<a href="https://spunk.bet">Spunk.bet</a>
+<a href="https://pfp.best">pfp.best</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">&copy; 2026 SPUNK LLC. All rights reserved. A SPUNK LLC Property. Pricing data updated March 2026.</div>
 </footer>
 
 <script>
